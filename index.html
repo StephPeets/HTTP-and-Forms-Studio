@@ -3,36 +3,43 @@
 <head>
 	<meta charset="utf-8">
 	<script>
-		let searchEngineFunction = function () {
 		let actions = {
-   "google": "https://www.google.com/",
-	 "duckDuckGo": "https://duckduckgo.com/",
-	 "bing": "https://bing.com/",
-	 "ask": "https://www.ask.com/web"
+			"google": "https://www.google.com/search",
+			"duckDuckGo": "https://duckduckgo.com/",
+			"bing": "https://www.bing.com/search",
+			"ask": "https://www.ask.com/web"
 		};
-		window.addEventListener("load", function(){
-		let setSearchEngine = document.getElementById("searchForm");
-		let selectSearchEngine = document.querySelector("[name=engine]:checked");
 
-    });
-		let action = actions[selectedEngine.value];
-		}
-		setSearchEngine.setAttribute("action", action)
-
-
+		window.addEventListener("load", function () {
+			const form = document.getElementById("searchForm");
+			form.addEventListener("submit", function () {
+				const selectedEngine = document.querySelector("input[name=engine]:checked");
+				let actionUrl = actions[selectedEngine.id];
+				return form.setAttribute("action", actionUrl);
+			});
+		});
 	</script>
 </head>
 
 <body>
 
-	<form action="" id="searchForm" method="POST">
-    <!-- TODO: add form elements -->
-		<input type="text" name="q">
-		<label>Google<input name="google" type="radio"></label>
-		<label>DuckDuckGo<input name="duckDuckGo" type="radio"></label>
-		<label>Bing<input name="bing" type="radio"></label>
-		<label>Ask<input name="bing" type="radio"></label><br>
-		<button type="submit" value="Go!">Go!</button>
+	<div>
+		<form action="" id="searchForm" method="get">
+	</div>
+	<div>
+		<label for="searchText">Search: <input type="text" name="q" id="searchText"></label>
+	</div>
+	<div>
+		<label for="google"><input name="engine" value="google" type="radio"> Google</label> <br>
+		<label for="duckDuckGo"><input name="engine" id="duckDuckGo" type="radio"> DuckDuckGo</label><br>
+		<label for="bing"><input name="engine" id="bing" type="radio"> Bing</label><br>
+		<label for="ask"><input name="engine" id="ask" type="radio"> Ask</label><br>
+	</div>
+	<div>
+		<button type="submit">Go!</button>
+		<button type="reset">Reset</button>
+	</div>
+
 	</form>
 
 </body>
